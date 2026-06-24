@@ -26,7 +26,7 @@ const HomePage = () => {
     const { data } = await supabase
       .from('posts')
       .select(`
-        id, title, content, view_count, created_at, user_id,
+        id, title, content, image_url, view_count, created_at, user_id,
         profiles!posts_profiles_fkey(username),
         post_likes(id, user_id),
         comments(id),
@@ -46,25 +46,41 @@ const HomePage = () => {
   return (
     <Container maxWidth="md">
       <Box sx={{ py: 4 }}>
-        <Box sx={{ mb: 4, textAlign: 'center' }}>
-          <Typography variant="h4" fontWeight={700} color="primary" gutterBottom>
-            자유 게시판
+        {/* 헤더 배너 */}
+        <Box
+          sx={{
+            mb: 4, p: 4, borderRadius: 3, textAlign: 'center',
+            background: 'linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #52b788 100%)',
+            color: 'white',
+          }}
+        >
+          <Typography variant="h4" fontWeight={800} gutterBottom sx={{ letterSpacing: '-0.5px' }}>
+            🍀 네잎클로버
           </Typography>
-          <Typography color="text.secondary">
-            자유롭게 이야기를 나눠보세요!
+          <Typography variant="body1" sx={{ opacity: 0.9 }}>
+            맛있는 맛집 이야기를 함께 나눠요!
           </Typography>
         </Box>
 
+        {/* 검색창 */}
         <TextField
           fullWidth
-          placeholder="제목 또는 내용으로 검색..."
+          placeholder="맛집 이름이나 지역으로 검색..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          sx={{ mb: 3 }}
+          sx={{
+            mb: 3,
+            '& .MuiOutlinedInput-root': {
+              borderRadius: 3,
+              bgcolor: 'white',
+              '&:hover fieldset': { borderColor: 'primary.light' },
+              '&.Mui-focused fieldset': { borderColor: 'primary.main' },
+            },
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon color="action" />
+                <SearchIcon color="primary" />
               </InputAdornment>
             ),
           }}
@@ -72,18 +88,19 @@ const HomePage = () => {
 
         {loading ? (
           <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-            <CircularProgress />
+            <CircularProgress color="primary" />
           </Box>
         ) : filtered.length === 0 ? (
           <Box sx={{ textAlign: 'center', py: 8 }}>
+            <Typography sx={{ fontSize: 48, mb: 2 }}>🍀</Typography>
             <Typography color="text.secondary" variant="h6">
-              {search ? '검색 결과가 없어요.' : '아직 글이 없어요. 첫 번째 글을 작성해보세요!'}
+              {search ? '검색 결과가 없어요.' : '첫 번째 맛집을 추천해보세요!'}
             </Typography>
           </Box>
         ) : (
           <Grid container spacing={2}>
             {filtered.map(post => (
-              <Grid item xs={12} key={post.id}>
+              <Grid item xs={12} sm={6} key={post.id}>
                 <PostCard post={post} />
               </Grid>
             ))}
@@ -93,10 +110,10 @@ const HomePage = () => {
 
       {user && (
         <Fab
-          color="secondary"
-          aria-label="글쓰기"
+          color="primary"
+          aria-label="맛집 추천"
           onClick={() => navigate('/write')}
-          sx={{ position: 'fixed', bottom: 32, right: 32 }}
+          sx={{ position: 'fixed', bottom: 32, right: 32, boxShadow: '0 4px 14px rgba(45,106,79,0.4)' }}
         >
           <AddIcon />
         </Fab>
