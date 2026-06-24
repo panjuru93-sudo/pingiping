@@ -5,6 +5,7 @@ import {
 } from '@mui/material'
 import EditNoteIcon from '@mui/icons-material/EditNote'
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
+import EmailIcon from '@mui/icons-material/Email'
 import { supabase } from './lib/supabase'
 import GuestbookCard from './components/GuestbookCard'
 import GuestbookForm from './components/GuestbookForm'
@@ -71,6 +72,24 @@ function App() {
         >
           방명록 남기기
         </Button>
+
+        <Box
+          component="a"
+          href="mailto:panjuru93@gmail.com"
+          sx={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 0.7,
+            mt: 2,
+            color: 'rgba(255,255,255,0.8)',
+            textDecoration: 'none',
+            fontSize: '0.9rem',
+            '&:hover': { color: '#fff' },
+          }}
+        >
+          <EmailIcon sx={{ fontSize: 16 }} />
+          panjuru93@gmail.com
+        </Box>
       </Box>
 
       {/* 카운트 */}
