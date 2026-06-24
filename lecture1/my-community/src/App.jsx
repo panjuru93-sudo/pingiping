@@ -13,7 +13,7 @@ function App() {
     <AuthProvider>
       <HashRouter>
         <Navbar />
-        <Box sx={{ pt: 8, minHeight: '100vh', bgcolor: 'background.default' }}>
+        <Box sx={{ pt: 8, minHeight: '100vh', bgcolor: '#f0fdf4' }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
