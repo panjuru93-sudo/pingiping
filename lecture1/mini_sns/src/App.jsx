@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import MainPage from './pages/MainPage'
@@ -14,7 +14,7 @@ const PrivateRoute = ({ element }) =>
 
 function App() {
   return (
-    <BrowserRouter basename="/pingiping/mini_sns">
+    <HashRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -25,7 +25,7 @@ function App() {
         <Route path="/mypage" element={<PrivateRoute element={<MyPage />} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
