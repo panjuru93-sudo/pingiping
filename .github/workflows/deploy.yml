@@ -47,6 +47,9 @@ jobs:
 
       - name: Build mini_sns
         working-directory: lecture1/mini_sns
+        env:
+          VITE_SUPABASE_URL: https://rmruupekxdrhqnxfgtxd.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtcnV1cGVreGRyaHFueGZndHhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMjA4MjgsImV4cCI6MjA5NzY5NjgyOH0.Cf2amfMeCDB9t6AgBcKSO00tjNJEuSKKOCjasFNPQRU
         run: npm run build
 
       - name: Prepare deployment
