@@ -41,13 +41,23 @@ jobs:
         working-directory: lecture1/my-guestbook
         run: npm run build
 
+      - name: Install dependencies (mini_sns)
+        working-directory: lecture1/mini_sns
+        run: npm install
+
+      - name: Build mini_sns
+        working-directory: lecture1/mini_sns
+        run: npm run build
+
       - name: Prepare deployment
         run: |
           mkdir -p _site/my-community
           mkdir -p _site/my-guestbook
+          mkdir -p _site/mini_sns
           cp index.html _site/
           cp -r lecture1/my-community/dist/. _site/my-community/
           cp -r lecture1/my-guestbook/dist/. _site/my-guestbook/
+          cp -r lecture1/mini_sns/dist/. _site/mini_sns/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
